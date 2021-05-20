@@ -53,5 +53,5 @@ jobs:
       with:
         app-name: 'sqlwebapp77'
         slot-name: 'sqlwebappslot'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e455035f7c0b42e2afa204f818da08c5 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_2959cb4f3ff14d6fb6c6fb49fd031757 }}
         package: .
