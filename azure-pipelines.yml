@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+  - 
+  
+- task: SqlAzureDacpacDeployment@1
+  inputs:
+    AuthenticationType: 'connectionString'
+    ConnectionString: 'Server=tcp:demosqlsrvq.database.windows.net,1433;Initial Catalog=demosqldbq;Persist Security Info=False;User ID=sqlqaiss;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication="Active Directory Integrated";'
+    deployType: 'InlineSqlTask'
+    SqlInline: |
+      USE [main]
+        GO
+      IF NOT EXISTS (SELECT name FROM main.sys.databases WHERE name = N'DatabaseExample')
+      CREATE DATABASE [DatabaseExample]
+      GO
+    IpDetectionMethod: 'AutoDetect'
